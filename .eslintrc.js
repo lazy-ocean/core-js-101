@@ -5,9 +5,7 @@ module.exports = {
     node: true,
     mocha: true,
   },
-  extends: [
-    'airbnb-base',
-  ],
+  extends: ['airbnb-base', 'prettier'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -16,5 +14,6 @@ module.exports = {
     ecmaVersion: 2018,
   },
   rules: {
+    'implicit-arrow-linebreak': 'warn',
   },
 };
