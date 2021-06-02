@@ -1,10 +1,11 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-param-reassign */
 /* ************************************************************************************************
  *                                                                                                *
  * Plese read the following tutorial before implementing tasks:                                   *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise       *
  *                                                                                                *
  ************************************************************************************************ */
-
 
 /**
  * Return Promise object that is resolved with string value === 'Hooray!!! She said "Yes"!',
@@ -28,10 +29,20 @@
  *      .catch((error) => console.log(error.message)) // 'Error: Wrong parameter is passed!
  *                                                    //  Ask her again.';
  */
-function willYouMarryMe(/* isPositiveAnswer */) {
-  throw new Error('Not implemented');
-}
-
+const willYouMarryMe = (isPositive) =>
+  new Promise((resolve, reject) => {
+    switch (isPositive) {
+      case true:
+        resolve('Hooray!!! She said "Yes"!');
+        break;
+      case false:
+        resolve('Oh no, she said "No".');
+        break;
+      default:
+        reject(Error('Wrong parameter is passed! Ask her again.'));
+        break;
+    }
+  });
 
 /**
  * Return Promise object that should be resolved with array containing plain values.
@@ -48,9 +59,7 @@ function willYouMarryMe(/* isPositiveAnswer */) {
  *    })
  *
  */
-function processAllPromises(/* array */) {
-  throw new Error('Not implemented');
-}
+const processAllPromises = (arr) => Promise.all(arr);
 
 /**
  * Return Promise object that should be resolved with value received from
@@ -71,9 +80,7 @@ function processAllPromises(/* array */) {
  *    })
  *
  */
-function getFastestPromise(/* array */) {
-  throw new Error('Not implemented');
-}
+const getFastestPromise = (arr) => Promise.race(arr);
 
 /**
  * Return Promise object that should be resolved with value that is
@@ -92,9 +99,16 @@ function getFastestPromise(/* array */) {
  *    });
  *
  */
-function chainPromises(/* array, action */) {
-  throw new Error('Not implemented');
-}
+const chainPromises = (array, action) => {
+  const result = [];
+  return Promise.resolve(array)
+    .then((data) =>
+      data.forEach((promise) => {
+        promise.then((res) => result.push(res));
+      })
+    )
+    .then(() => result.reduce((accum, curr) => action(accum, curr)));
+};
 
 module.exports = {
   willYouMarryMe,
