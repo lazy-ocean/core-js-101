@@ -16,5 +16,6 @@ module.exports = {
   rules: {
     'implicit-arrow-linebreak': 'off',
     'no-plusplus': 'off',
+    'no-unused-vars': 'warn',
   },
 };
