@@ -189,7 +189,7 @@ const roundToPowerOfTen = (num, pow) => Math.round(num / 10 ** pow) * 10 ** pow;
  */
 const isPrime = (num) => {
   const half = Math.floor(num / 2);
-  for (let i = half; i > 1; i--) {
+  for (let i = half; i > 1; i - 1) {
     if (num % i === 0) return false;
   }
   return true;

@@ -13,9 +13,5 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
   },
-  rules: {
-    'implicit-arrow-linebreak': 'off',
-    'no-plusplus': 'off',
-    'no-unused-vars': 'warn',
-  },
+  rules: {},
 };

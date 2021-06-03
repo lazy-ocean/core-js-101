@@ -116,9 +116,8 @@ const isTriangle = (a, b, c) => a + b > c && a + c > b && b + c > a;
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-const doRectanglesOverlap = (rect1, rect2) => {
-  /*   if Math.abs(rectA.x - rectB.x) < (Math.abs(rectA.width + rectB.width) / 2) 
-&& (Math.abs(rectA.y - rectB.y) < (Math.abs(rectA.height + rectB.height) / 2)) */
+const doRectanglesOverlap = (/* rect1, rect2 */) => {
+  throw new Error('Not implemented');
 };
 
 /**
