@@ -30,8 +30,7 @@
  *
  * @return {RegExp}
  */
-const getRegexForGuid = () =>
-  new RegExp(/^{[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}}$/);
+const getRegexForGuid = () => new RegExp(/^{[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}}$/);
 
 /**
  * Returns the regexp that matches all the strings from first column
@@ -72,8 +71,7 @@ const getRegexForPitSpot = () => new RegExp(/p.{2}$|^s|^r/);
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-const getPasswordValidator = (l) =>
-  new RegExp(`^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{${l},}$`);
+const getPasswordValidator = (l) => new RegExp(`^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{${l},}$`);
 
 module.exports = {
   getRegexForGuid,

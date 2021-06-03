@@ -29,20 +29,19 @@
  *      .catch((error) => console.log(error.message)) // 'Error: Wrong parameter is passed!
  *                                                    //  Ask her again.';
  */
-const willYouMarryMe = (isPositive) =>
-  new Promise((resolve, reject) => {
-    switch (isPositive) {
-      case true:
-        resolve('Hooray!!! She said "Yes"!');
-        break;
-      case false:
-        resolve('Oh no, she said "No".');
-        break;
-      default:
-        reject(Error('Wrong parameter is passed! Ask her again.'));
-        break;
-    }
-  });
+const willYouMarryMe = (isPositive) => new Promise((resolve, reject) => {
+  switch (isPositive) {
+    case true:
+      resolve('Hooray!!! She said "Yes"!');
+      break;
+    case false:
+      resolve('Oh no, she said "No".');
+      break;
+    default:
+      reject(Error('Wrong parameter is passed! Ask her again.'));
+      break;
+  }
+});
 
 /**
  * Return Promise object that should be resolved with array containing plain values.
@@ -102,11 +101,9 @@ const getFastestPromise = (arr) => Promise.race(arr);
 const chainPromises = (array, action) => {
   const result = [];
   return Promise.resolve(array)
-    .then((data) =>
-      data.forEach((promise) => {
-        promise.then((res) => result.push(res));
-      })
-    )
+    .then((data) => data.forEach((promise) => {
+      promise.then((res) => result.push(res));
+    }))
     .then(() => result.reduce((accum, curr) => action(accum, curr)));
 };
 

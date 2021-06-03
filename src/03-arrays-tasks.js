@@ -32,8 +32,8 @@ const findElement = (arr, value) => arr.indexOf(value);
  *    2 => [ 1, 3 ]
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
-const generateOdds = (length) =>
-  Array.from({ length: length * 2 }, (n, i) => i + 1).filter((num) => num % 2);
+const generateOdds = (length) => Array.from({ length: length * 2 }, (n, i) => i + 1)
+  .filter((num) => num % 2);
 
 /**
  * Returns the doubled array - elements of the specified array
@@ -73,8 +73,7 @@ const getArrayOfPositives = (arr) => arr.filter((num) => num > 0);
  *    [ 1, 2, 3, 4, 5 ] => []
  *    [ 'cat, 'dog', 'raccoon' ] => [ 'cat', 'dog', 'raccoon' ]
  */
-const getArrayOfStrings = (arr) =>
-  arr.filter((item) => typeof item === 'string');
+const getArrayOfStrings = (arr) => arr.filter((item) => typeof item === 'string');
 
 /**
  * Removes falsy values from the specified array
@@ -202,8 +201,7 @@ const toArrayOfSquares = (arr) => arr.map((item) => item ** 2);
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-const getMovingSum = (arr) =>
-  arr.map((n, i) => arr.slice(0, i + 1).reduce((a, b) => a + b));
+const getMovingSum = (arr) => arr.map((n, i) => arr.slice(0, i + 1).reduce((a, b) => a + b));
 
 /**
  * Returns every second item from the specified array:
@@ -232,8 +230,7 @@ const getSecondItems = (arr) => arr.filter((n, i) => i % 2);
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-const propagateItemsByPositionIndex = (arr) =>
-  arr.flatMap((item, i) => Array(i + 1).fill(item));
+const propagateItemsByPositionIndex = (arr) => arr.flatMap((item, i) => Array(i + 1).fill(item));
 
 /**
  * Returns the 3 largest numbers from the specified array
@@ -263,8 +260,7 @@ const get3TopItems = (arr) => arr.sort((a, b) => b - a).slice(0, 3);
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-const getPositivesCount = (arr) =>
-  arr.filter((item) => typeof item === 'number' && item > 0).length;
+const getPositivesCount = (arr) => arr.filter((item) => typeof item === 'number' && item > 0).length;
 
 /**
  * Sorts digit names
@@ -292,8 +288,7 @@ const numbersMap = {
   nine: 9,
   zero: 0,
 };
-const sortDigitNamesByNumericOrder = (arr) =>
-  arr.sort((a, b) => numbersMap[a] - numbersMap[b]);
+const sortDigitNamesByNumericOrder = (arr) => arr.sort((a, b) => numbersMap[a] - numbersMap[b]);
 
 /**
  * Returns the sum of all items in the specified array of numbers
@@ -337,8 +332,7 @@ const getFalsyValuesCount = (arr) => arr.length - arr.filter(Boolean).length;
  *    [ null, undefined, null ], null => 2
  *    [ true, 0, 1, 'true' ], true => 1
  */
-const findAllOccurences = (arr, search) =>
-  arr.filter((item) => item === search).length;
+const findAllOccurences = (arr, search) => arr.filter((item) => item === search).length;
 
 /**
  * Concatenates all elements from specified array into single string with ',' delimeter
@@ -379,12 +373,12 @@ const toStringList = (arr) => arr.join();
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-const sortCitiesArray = (arr) =>
-  arr.sort((a, b) =>
-    a.country !== b.country
-      ? a.country.localeCompare(b.country)
-      : a.city.localeCompare(b.city)
-  );
+const sortCitiesArray = (arr) => arr.sort((a, b) => {
+  if (a.country !== b.country) {
+    return a.country.localeCompare(b.country);
+  }
+  return a.city.localeCompare(b.city);
+});
 
 /**
  * Creates an indentity matrix of the specified size
@@ -404,10 +398,8 @@ const sortCitiesArray = (arr) =>
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-const getIdentityMatrix = (l) =>
-  new Array(l)
-    .fill(new Array(l).fill(0))
-    .map((array, i) => array.map((item, index) => (index === i ? 1 : item)));
+const getIdentityMatrix = (l) => new Array(l).fill(new Array(l).fill(0))
+  .map((array, i) => array.map((item, index) => (index === i ? 1 : item)));
 
 /**
  * Creates an array of integers from the specified start to end (inclusive)
@@ -422,8 +414,9 @@ const getIdentityMatrix = (l) =>
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-const getIntervalArray = (start, finish) =>
-  Array.from({ length: finish - start + 1 }, (n, i) => i + start);
+const getIntervalArray = (start, finish) => Array.from(
+  { length: finish - start + 1 }, (n, i) => i + start,
+);
 
 /**
  * Returns array containing only unique values from the specified array.
@@ -436,8 +429,7 @@ const getIntervalArray = (start, finish) =>
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-const distinct = (arr) =>
-  arr.filter((item, index) => arr.indexOf(item) === index);
+const distinct = (arr) => arr.filter((item, index) => arr.indexOf(item) === index);
 
 /**
  * Groups elements of the specified array by key.
@@ -469,13 +461,12 @@ const distinct = (arr) =>
  *    "Poland" => ["Lodz"]
  *   }
  */
-const group = (arr, keySelector, valueSelector) =>
-  arr.reduce((acc, item) => {
-    const country = keySelector(item);
-    return acc.has(country)
-      ? acc.set(country, [...acc.get(country), valueSelector(item)])
-      : acc.set(country, [valueSelector(item)]);
-  }, new Map());
+const group = (arr, keySelector, valueSelector) => arr.reduce((acc, item) => {
+  const country = keySelector(item);
+  return acc.has(country)
+    ? acc.set(country, [...acc.get(country), valueSelector(item)])
+    : acc.set(country, [valueSelector(item)]);
+}, new Map());
 
 /**
  * Projects each element of the specified array to a sequence
@@ -490,8 +481,7 @@ const group = (arr, keySelector, valueSelector) =>
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-const selectMany = (arr, childrenSelector) =>
-  arr.flatMap((item) => childrenSelector(item));
+const selectMany = (arr, childrenSelector) => arr.flatMap((item) => childrenSelector(item));
 
 /**
  * Returns an element from the multidimentional array by the specified indexes.

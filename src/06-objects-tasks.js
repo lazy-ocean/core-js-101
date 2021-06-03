@@ -50,8 +50,7 @@ const getJSON = (obj) => JSON.stringify(obj);
  *    const r = fromJSON(Circle.prototype, '{"radius":10}');
  *
  */
-const fromJSON = (proto, json) =>
-  Object.setPrototypeOf(JSON.parse(json), proto);
+const fromJSON = (proto, json) => Object.setPrototypeOf(JSON.parse(json), proto);
 
 /**
  * Css selectors builder
@@ -125,15 +124,12 @@ class HTMLElement {
       pseudoElement: false,
     };
     this.currentPosition = 0;
-    this.countError =
-      'Element, id and pseudo-element should not occur more then one time inside the selector';
-    this.orderError =
-      'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element';
+    this.countError = 'Element, id and pseudo-element should not occur more then one time inside the selector';
+    this.orderError = 'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element';
   }
 
   element(value) {
-    if (this.currentPosition > ELEMENTS_ORDER.element)
-      throw new Error(this.orderError);
+    if (this.currentPosition > ELEMENTS_ORDER.element) throw new Error(this.orderError);
     if (this.elements.element) throw new Error(this.countError);
     this.name += value;
     this.elements.element = true;
@@ -142,16 +138,14 @@ class HTMLElement {
   }
 
   class(value) {
-    if (this.currentPosition > ELEMENTS_ORDER.class)
-      throw new Error(this.orderError);
+    if (this.currentPosition > ELEMENTS_ORDER.class) throw new Error(this.orderError);
     this.name += `.${value}`;
     this.currentPosition = 3;
     return this;
   }
 
   id(value) {
-    if (this.currentPosition > ELEMENTS_ORDER.id)
-      throw new Error(this.orderError);
+    if (this.currentPosition > ELEMENTS_ORDER.id) throw new Error(this.orderError);
     if (this.elements.id) throw new Error(this.countError);
     this.name += `#${value}`;
     this.elements.id = true;
@@ -160,24 +154,21 @@ class HTMLElement {
   }
 
   attr(value) {
-    if (this.currentPosition > ELEMENTS_ORDER.attribute)
-      throw new Error(this.orderError);
+    if (this.currentPosition > ELEMENTS_ORDER.attribute) throw new Error(this.orderError);
     this.name += `[${value}]`;
     this.currentPosition = 4;
     return this;
   }
 
   pseudoClass(value) {
-    if (this.currentPosition > ELEMENTS_ORDER.pseudoClass)
-      throw new Error(this.orderError);
+    if (this.currentPosition > ELEMENTS_ORDER.pseudoClass) throw new Error(this.orderError);
     this.name += `:${value}`;
     this.currentPosition = 5;
     return this;
   }
 
   pseudoElement(value) {
-    if (this.currentPosition > ELEMENTS_ORDER.pseudoElement)
-      throw new Error(this.orderError);
+    if (this.currentPosition > ELEMENTS_ORDER.pseudoElement) throw new Error(this.orderError);
     if (this.elements.pseudoElement) throw new Error(this.countError);
     this.name += `::${value}`;
     this.elements.pseudoElement = true;

@@ -66,8 +66,7 @@ const getAverage = (num1, num2) => {
  *   (0,0) (1,0)    => 1
  *   (-5,0) (10,-10) => 18.027756377319946
  */
-const getDistanceBetweenPoints = (x1, y1, x2, y2) =>
-  Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+const getDistanceBetweenPoints = (x1, y1, x2, y2) => Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 
 /**
  * Returns a root of linear equation a*x + b = 0 given by coefficients a and b.
@@ -148,8 +147,7 @@ const parseNumberFromString = (str) => +str;
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-const getParallelipidedDiagonal = (a, b, c) =>
-  Math.sqrt(a ** 2 + b ** 2 + c ** 2);
+const getParallelipidedDiagonal = (a, b, c) => Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 
 /**
  * Returns the number rounded to specified power of 10.
@@ -189,7 +187,7 @@ const roundToPowerOfTen = (num, pow) => Math.round(num / 10 ** pow) * 10 ** pow;
  */
 const isPrime = (num) => {
   const half = Math.floor(num / 2);
-  for (let i = half; i > 1; i - 1) {
+  for (let i = half; i > 1; i -= 1) {
     if (num % i === 0) return false;
   }
   return true;
