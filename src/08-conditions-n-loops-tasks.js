@@ -116,9 +116,9 @@ const isTriangle = (a, b, c) => a + b > c && a + c > b && b + c > a;
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-const doRectanglesOverlap = (/* rect1, rect2 */) => {
-  throw new Error('Not implemented');
-};
+const doRectanglesOverlap = (rA, rB) => Math.abs(rA.left - rB.left)
+  < Math.abs(rA.width + rB.width) / 2
+  && Math.abs(rA.top - rB.top) < Math.abs(rA.height + rB.height) / 2;
 
 /**
  * Returns true, if point lies inside the circle, otherwise false.
@@ -133,8 +133,8 @@ const doRectanglesOverlap = (/* rect1, rect2 */) => {
  *
  * Point is object of
  *  {
- *     x: 5,
- *     y: 5
+ *     x: 7,
+ *     y: 10
  *  }
  *
  * @param {object} circle
@@ -146,9 +146,8 @@ const doRectanglesOverlap = (/* rect1, rect2 */) => {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
-}
+const isInsideCircle = ({ center, radius }, { x, y }) => (x - center.x) ** 2
+  + (y - center.y) ** 2 < radius ** 2;
 
 /**
  * Returns the first non repeated char in the specified strings otherwise returns null.
@@ -161,9 +160,13 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
-}
+const findFirstSingleChar = (str) => {
+  for (let i = 0; i < str.length; i += 1) {
+    const char = str[i];
+    if (str.indexOf(char) === i && str.indexOf(char, i + 1) === -1) return char;
+  }
+  return null;
+};
 
 /**
  * Returns the string representation of math interval,
@@ -187,9 +190,11 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
-}
+const getIntervalString = (a, b, isStartIncluded, isEndIncluded) => {
+  const start = a > b ? b : a;
+  const finish = start === a ? b : a;
+  return `${isStartIncluded ? '[' : '('}${start}, ${finish}${isEndIncluded ? ']' : ')'}`;
+};
 
 /**
  * Reverse the specified string (put all chars in reverse order)
@@ -203,9 +208,7 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
-}
+const reverseString = (str) => str.split('').reverse().join('');
 
 /**
  * Reverse the specified integer number (put all digits in reverse order)
@@ -219,9 +222,7 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
-}
+const reverseInteger = (num) => parseInt(num.toString().split('').reverse().join(''), 10);
 
 /**
  * Validates the CCN (credit card number) and return true if CCN is valid
@@ -243,9 +244,22 @@ function reverseInteger(/* num */) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
-}
+const isCreditCardNumber = (ccn) => {
+  const str = ccn.toString();
+  const strNum = str.slice(0, -1);
+  const l = str.length;
+  let newNum = parseInt(str[l - 1], 10);
+  const module = l % 2;
+  for (let i = strNum.length - 1; i >= 0; i -= 1) {
+    let temp = 0;
+    if (i % 2 === module) {
+      temp = strNum[i] * 2;
+    } else temp = strNum[i];
+    newNum += parseInt(temp / 10, 10);
+    newNum += temp % 10;
+  }
+  return newNum % 10 === 0;
+};
 
 /**
  * Returns the digital root of integer:
