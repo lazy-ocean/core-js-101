@@ -23,10 +23,7 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.asin(x))
  *
  */
-function getComposition(/* f, g */) {
-  throw new Error('Not implemented');
-}
-
+const getComposition = (f, g) => (a) => f(g(a));
 
 /**
  * Returns the math power function with the specified exponent
@@ -44,10 +41,7 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
-}
-
+const getPowerFunction = (exponent) => (arg) => arg ** exponent;
 
 /**
  * Returns the polynom function of one argument based on specified coefficients.
@@ -66,7 +60,6 @@ function getPolynom() {
   throw new Error('Not implemented');
 }
 
-
 /**
  * Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.
@@ -81,10 +74,14 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
-}
-
+const memoize = (f) => {
+  const cache = {};
+  return () => {
+    const { name } = f;
+    if (!cache[name]) cache[name] = f();
+    return cache[name];
+  };
+};
 
 /**
  * Returns the function trying to call the passed function and if it throws,
@@ -104,7 +101,6 @@ function memoize(/* func */) {
 function retry(/* func, attempts */) {
   throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the logging wrapper for the specified method,
@@ -147,10 +143,7 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
-}
-
+const partialUsingArguments = (fn, ...args1) => (...args2) => fn(...args1, ...args2);
 
 /**
  * Returns the id generator function that returns next integer starting
