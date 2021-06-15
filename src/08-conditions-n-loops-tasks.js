@@ -275,9 +275,10 @@ const isCreditCardNumber = (ccn) => {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
-}
+const getDigitalRoot = (num) => {
+  const res = num.toString().split('').reduce((a, b) => parseInt(a, 10) + parseInt(b, 10));
+  return res >= 10 ? getDigitalRoot(res) : res;
+};
 
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
@@ -300,9 +301,22 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
-}
+const openingSymbols = ['(', '[', '{', '<'];
+const closingSymbols = [')', ']', '}', '>'];
+
+const isBracketsBalanced = (str) => {
+  const stack = [];
+  for (let i = 0; i < str.length; i += 1) {
+    if (openingSymbols.includes(str[i])) {
+      stack.push(str[i]);
+    } else {
+      const index = closingSymbols.indexOf(str[i]);
+      const pairItem = openingSymbols[index];
+      if (stack.pop() !== pairItem) return false;
+    }
+  }
+  return stack.length === 0;
+};
 
 /**
  * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
@@ -324,9 +338,9 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
+const toNaryString = (/* num, base */) => {
   throw new Error('Not implemented');
-}
+};
 
 /**
  * Returns the commom directory path for specified array of full filenames.
@@ -340,9 +354,20 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
-}
+const getCommonDirectoryPath = (p) => {
+  const paths = p.map((path) => path.split('/'));
+  const [first, ...rest] = paths;
+  let commonPath = '';
+  for (let i = 0; i < first.length; i += 1) {
+    const common = rest.every((path) => {
+      const item = path.shift();
+      return item === first[i];
+    });
+    if (common) commonPath += `${first[i]}/`;
+    if (!common) return commonPath;
+  }
+  return commonPath;
+};
 
 /**
  * Returns the product of two specified matrixes.
